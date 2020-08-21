@@ -6839,7 +6839,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "QueryStringOperator",
@@ -6890,7 +6891,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "PostArgsOperator",
@@ -6936,7 +6938,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "RequestUriOperator",
@@ -6987,7 +6990,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "RequestHeaderOperator",
@@ -7033,7 +7037,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "RequestBodyOperator",
@@ -7111,7 +7116,8 @@
             "LessThanOrEqual",
             "GreaterThan",
             "GreaterThanOrEqual",
-            "Wildcard"
+            "Wildcard",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "UrlPathOperator",
@@ -7157,7 +7163,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "UrlFileExtensionOperator",
@@ -7203,7 +7210,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "UrlFileNameOperator",
@@ -7285,7 +7293,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "CookiesOperator",
