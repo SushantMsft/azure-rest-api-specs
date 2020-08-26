@@ -9870,7 +9870,19 @@
           "description": "The JSON object that contains the properties to determine origin health using real requests/responses. This property is currently not supported.",
           "type": "object",
           "$ref": "#/definitions/ResponseBasedOriginErrorDetectionParameters"
-        }
+        },
+        "sessionAffinityEnabledState": {
+          "description": "Whether to allow session affinity on this host. Valid options are 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SessionAffinityEnabledState",
+            "modelAsString": true
+          }
+        },
       }
     },
     "LoadBalancingSettingsParameters": {
@@ -10036,18 +10048,6 @@
         "optimizationType": {
           "description": "Specifies what scenario the customer wants this AFDX endpoint to optimize for, e.g. Download, Media services. With this information, AFDX can apply scenario driven optimization.",
           "$ref": "#/definitions/OptimizationType"
-        },
-        "sessionAffinityEnabledState": {
-          "description": "Whether to allow session affinity on this host. Valid options are 'Enabled' or 'Disabled'",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SessionAffinityEnabledState",
-            "modelAsString": true
-          }
         },
         "forwardingProtocol": {
           "description": "Protocol this rule will use when forwarding traffic to backends.",
