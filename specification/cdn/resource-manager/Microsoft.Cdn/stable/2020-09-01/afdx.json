@@ -9140,6 +9140,19 @@
           "readOnly": true,
           "description": "Provisioning status",
           "type": "string"
+        },
+        "deploymentStatus":{
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeploymentStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -9283,6 +9296,19 @@
           "readOnly": true,
           "description": "Provisioning status of the endpoint.",
           "type": "string"
+        },
+        "deploymentStatus":{
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeploymentStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -9472,6 +9498,19 @@
           "readOnly": true,
           "description": "Provisioning status",
           "type": "string"
+        },
+        "deploymentStatus":{
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeploymentStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -9536,6 +9575,19 @@
           "readOnly": true,
           "description": "Provisioning status",
           "type": "string"
+        },
+        "deploymentStatus":{
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeploymentStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -9609,6 +9661,19 @@
           ],
           "x-ms-enum": {
             "name": "PrivateEndpointStatus",
+            "modelAsString": true
+          }
+        },
+        "deploymentStatus":{
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeploymentStatus",
             "modelAsString": true
           }
         }
@@ -9756,6 +9821,19 @@
           "readOnly": true,
           "description": "Provisioning status of the origin group.",
           "type": "string"
+        },
+        "deploymentStatus":{
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeploymentStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -9877,6 +9955,19 @@
           "readOnly": true,
           "description": "Provisioning status",
           "type": "string"
+        },
+        "deploymentStatus":{
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeploymentStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -10047,6 +10138,19 @@
           "readOnly": true,
           "description": "Provisioning status",
           "type": "string"
+        },
+        "deploymentStatus":{
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeploymentStatus",
+            "modelAsString": true
+          }
         }
       }
     },
