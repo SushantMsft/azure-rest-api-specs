@@ -9219,14 +9219,10 @@
           "description": "Issuance status of Custom Https of the domain.",
           "readOnly": true,
           "enum": [
-            "SubmittingDomainControlValidationRequest",
-            "PendingDomainControlValidationREquestApproval",
-            "DomainControlValidationRequestApproved",
-            "DomainControlValidationRequestRejected",
-            "DomainControlValidationRequestTimedOut",
-            "IssuingCertificate",
-            "CertificateIssued",
-            "CertificateRejected"
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -9474,19 +9470,6 @@
           "readOnly": true,
           "description": "Provisioning status",
           "type": "string"
-        },
-        "deploymentStatus":{
-          "enum": [
-            "NotStarted",
-            "InProgress",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DeploymentStatus",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -9858,7 +9841,7 @@
             "name": "SessionAffinityEnabledState",
             "modelAsString": true
           }
-        },
+        }
       }
     },
     "LoadBalancingSettingsParameters": {
