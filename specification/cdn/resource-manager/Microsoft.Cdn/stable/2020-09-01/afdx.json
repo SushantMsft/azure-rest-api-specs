@@ -9029,7 +9029,7 @@
         "certificateSourceLocation": {
           "description": "Resource reference to the KV secret",
           "type": "object",
-          "$ref": "#/definitions/ResourceReference"
+          "$ref": "#/definitions/CertificateSourceProperties"
         },
         "certificateIssuanceState": {
           "description": "Issuance status of Custom Https of the domain.",
@@ -9045,6 +9045,20 @@
             "name": "CertificateIssuanceState",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "CertificateSourceProperties": {
+      "description": "The JSON object that contains the BYOC certificate related settings.",
+      "properties": {
+        "certificateSourceLocation": {
+          "description": "Resource reference to the KV secret",
+          "type": "object",
+          "$ref": "#/definitions/ResourceReference"
+        },
+        "certificateVersion": {
+          "description": "the version of the KV certificate",
+          "type": "string"
         }
       }
     },
@@ -9186,8 +9200,9 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string",
-          "description": "Resource ID."
+          "type": "object",
+          "description": "Resource ID.",
+          "$ref": "#/definitions/ResourceReference"
         },
         "patternsToMatch":{
           "description": "Waf patterns to match.",
