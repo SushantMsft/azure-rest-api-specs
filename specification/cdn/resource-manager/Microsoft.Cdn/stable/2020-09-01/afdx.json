@@ -7814,23 +7814,6 @@
         }
       }
     },
-    "LinkedKeyvaults": {      
-      "description": "List of associated Keyvaults under the profile.",
-      "properties": {
-      "value": {
-        "type": "array",
-        "readOnly": true,
-        "items": {
-          "$ref": "#/definitions/Secret"
-        },
-        "description": "List of linked Keyvaults for a profile."
-      },
-      "nextLink": {
-        "type": "string",
-        "description": "URL to get the next set of linked Keyvaults, if any."
-      }
-    }
-  },
     "LoadParameters": {
       "type": "object",
       "description": "Parameters required for content load.",
