@@ -8874,7 +8874,18 @@
         "provisioningState": {
           "readOnly": true,
           "description": "Provisioning status",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
         },
         "deploymentStatus":{
           "enum": [
@@ -9023,9 +9034,6 @@
     },
     "AFDEndpointProperties": {
       "description": "The JSON object that contains the properties required to create an endpoint.",
-      "required": [
-        "origins"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AFDEndpointPropertiesUpdateParameters"
@@ -9039,8 +9047,19 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "description": "Provisioning status of the endpoint.",
-          "type": "string"
+          "description": "Provisioning status",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
         },
         "deploymentStatus":{
           "enum": [
@@ -9116,7 +9135,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "routesEnabledState",
+            "name": "EnabledState",
             "modelAsString": true
           }
         }
@@ -9244,7 +9263,18 @@
         "provisioningState": {
           "readOnly": true,
           "description": "Provisioning status",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -9308,7 +9338,18 @@
         "provisioningState": {
           "readOnly": true,
           "description": "Provisioning status",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
         },
         "deploymentStatus":{
           "enum": [
@@ -9379,8 +9420,19 @@
       "properties": {
         "provisioningState": {
           "readOnly": true,
-          "description": "Provisioning status of the origin.",
-          "type": "string"
+          "description": "Provisioning status",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
         },
         "privateEndpointStatus": {
           "description": "The approval status for the connection to the Private Link",
@@ -9482,7 +9534,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "HealthProbeState",
+            "name": "EnabledState",
             "modelAsString": true
           }
         }
@@ -9553,8 +9605,19 @@
       "properties": {
         "provisioningState": {
           "readOnly": true,
-          "description": "Provisioning status of the origin group.",
-          "type": "string"
+          "description": "Provisioning status",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
         },
         "deploymentStatus":{
           "enum": [
@@ -9613,7 +9676,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "SessionAffinityEnabledState",
+            "name": "EnabledState",
             "modelAsString": true
           }
         }
@@ -9700,7 +9763,18 @@
         "provisioningState": {
           "readOnly": true,
           "description": "Provisioning status",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
         },
         "deploymentStatus":{
           "enum": [
@@ -9828,7 +9902,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "routesEnabledState",
+            "name": "EnabledState",
             "modelAsString": true
           }
         }
@@ -9883,7 +9957,18 @@
         "provisioningState": {
           "readOnly": true,
           "description": "Provisioning status",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
         },
         "deploymentStatus":{
           "enum": [
