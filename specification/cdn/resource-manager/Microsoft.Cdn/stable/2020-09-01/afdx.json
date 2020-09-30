@@ -8982,9 +8982,9 @@
           }
         },
         "certificateSourceLocation": {
-          "description": "Resource reference to the KV secret",
+          "description": "Resource reference to the secret. ie. subs/rg/profile/secret",
           "type": "object",
-          "$ref": "#/definitions/CertificateSourceProperties"
+          "$ref": "#/definitions/ResourceReference"
         },
         "certificateIssuanceState": {
           "description": "Issuance status of Custom Https of the domain.",
@@ -9000,20 +9000,6 @@
             "name": "CertificateIssuanceState",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "CertificateSourceProperties": {
-      "description": "The JSON object that contains the BYOC certificate related settings.",
-      "properties": {
-        "certificateSourceLocation": {
-          "description": "Resource reference to the KV secret",
-          "type": "object",
-          "$ref": "#/definitions/ResourceReference"
-        },
-        "certificateVersion": {
-          "description": "the version of the KV certificate",
-          "type": "string"
         }
       }
     },
