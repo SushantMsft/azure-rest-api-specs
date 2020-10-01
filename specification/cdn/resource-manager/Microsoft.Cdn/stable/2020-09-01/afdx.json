@@ -1019,7 +1019,7 @@
           "Endpoints"
         ],
         "description": "Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.",
-        "operationId": "Endpoints_ValidateCustomDomain",
+        "operationId": "AFDEndpoints_ValidateCustomDomain",
         "x-ms-examples": {
           "Endpoints_ValidateCustomDomain": {
             "$ref": "./examples/Endpoints_ValidateCustomDomain.json"
@@ -2768,16 +2768,16 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customdomains/{customDomainName}/updateOwnershipIdentifier": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customdomains/{customDomainName}/refreshValidationToken": {
       "post": {
         "tags": [
           "AFDCustomDomains"
         ],
-        "description": "Updates the domain ownership identifier.",
-        "operationId": "AFDCustomDomains_UpdateOwnershipIdentifier",
+        "description": "Updates the domain validation token.",
+        "operationId": "AFDCustomDomains_RefreshValidationToken",
         "x-ms-examples": {
           "AFDCustomDomains_Delete": {
-            "$ref": "./examples/AFDCustomDomains_UpdateOwnershipIdentifier.json"
+            "$ref": "./examples/AFDCustomDomains_RefreshValidationToken.json"
           }
         },
         "parameters": [
@@ -2807,10 +2807,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "schema": {
+              "type": "string"
+            }
           },
           "default": {
             "description": "CDN error response describing why the operation failed.",
@@ -3294,7 +3300,7 @@
         "operationId": "Endpoints_ValidateCustomDomain",
         "x-ms-examples": {
           "Endpoints_ValidateCustomDomain": {
-            "$ref": "./examples/Endpoints_ValidateCustomDomain.json"
+            "$ref": "./examples/AFDEndpoints_ValidateCustomDomain.json"
           }
         },
         "parameters": [
@@ -8863,7 +8869,8 @@
             "PendingDomainControlValidationRequestApproval",
             "DomainControlValidationRequestApproved",
             "DomainControlValidationRequestRejected",
-            "DomainControlValidationRequestTimedOut"
+            "DomainControlValidationRequestTimedOut",
+            "PendingDomainControlReValidationRequestApproval"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -8922,25 +8929,15 @@
           "description": "The host name of the domain. Must be a domain name.",
           "type": "string"
         },
-        "dnsSettings": {
-          "description": "The configuration specifying how to set DNS configuraiton.",
-          "type": "object",
-          "$ref": "#/definitions/DNSSettingsParameters"
-        },
         "httpsSettings": {
           "description": "The configuration specifying how to enable HTTPS for the domain - using AFDX managed certificate or user's own certificate. If not specified, enabling ssl uses AFDX managed certificate by default.",
           "type": "object",
           "$ref": "#/definitions/AFDDomainHttpsParameters"
-        }
-      }
-    },
-    "DNSSettingsParameters": {
-      "description": "The JSON object that contains the DNS related settings.",
-      "properties": {
-        "ownershipIdentifier": {
-          "description": "Challenge used for DNS TXT record or file based validation",
-          "readOnly": true,
-          "type": "string"
+        },
+        "validationProperties": {
+          "description": "Values the customer needs to validate domain ownership",
+          "type": "object",
+          "$ref": "#/definitions/DomainValidationProperties"
         },
         "azureDnsZone": {
           "description": "Resource reference to the Azure DNS zone",
@@ -8949,9 +8946,23 @@
         }
       }
     },
+    "DomainValidationProperties":{
+      "description": "The JSON object that contains the properties to validate a domain.",
+      "properties": {
+        "validationToken": {
+          "description": "Challenge used for DNS TXT record or file based validation",
+          "readOnly": true,
+          "type": "string"
+        },
+        "expirationDate": {
+          "description": "The date time that the token expires",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
     "AFDDomainHttpsParameters": {
       "description": "The JSON object that contains the properties to secure a domain.",
-      "discriminator": "certificateSource",
       "required": [
         "certificateSource",
         "protocolType"
@@ -8985,21 +8996,6 @@
           "description": "Resource reference to the secret. ie. subs/rg/profile/secret",
           "type": "object",
           "$ref": "#/definitions/ResourceReference"
-        },
-        "certificateIssuanceState": {
-          "description": "Issuance status of Custom Https of the domain.",
-          "readOnly": true,
-          "enum": [
-            "NotStarted",
-            "InProgress",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CertificateIssuanceState",
-            "modelAsString": true
-          }
         }
       }
     },
