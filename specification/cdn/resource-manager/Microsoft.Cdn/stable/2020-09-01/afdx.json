@@ -7752,13 +7752,7 @@
         {
           "$ref": "#/definitions/Certificate"
         }
-      ],
-      "properties": {
-        "dnsTxtRecordChallenge": {
-          "description": "DNS TXT record token.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "CustomerCertificate": {
       "description": "Customer Certificate used for https",
@@ -7775,8 +7769,8 @@
           "description": "Complete Url to the certificate",
           "type": "string"
         },
-        "isAutorotated": {
-        "description": "Whether autorotation enabled for the certificate",
+        "useLatestVersion": {
+        "description": "Whether to use the latest version for the certificate",
         "type": "boolean"
         }
       }
@@ -8968,11 +8962,11 @@
         "protocolType"
       ],
       "properties": {
-        "certificateSourceType": {
+        "certificateType": {
           "description": "Defines the source of the SSL certificate.",
           "enum": [
-            "AzureKeyVault",
-            "Cdn"
+            "CustomerCertificate",
+            "ManagedCertificate"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -8992,7 +8986,7 @@
             "modelAsString": false
           }
         },
-        "certificateSourceLocation": {
+        "secret": {
           "description": "Resource reference to the secret. ie. subs/rg/profile/secret",
           "type": "object",
           "$ref": "#/definitions/ResourceReference"
