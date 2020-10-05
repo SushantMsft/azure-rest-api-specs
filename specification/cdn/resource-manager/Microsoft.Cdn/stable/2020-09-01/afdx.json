@@ -7218,17 +7218,27 @@
         }
       }
     },
-    "UrlSigningActionParameters": {
-      "description": "Defines the parameters for the Url Signing action.",
+    "UrlSigningAction": {
+      "description": "Defines the url redirect action for the delivery rule.",
+      "x-ms-discriminator-value": "UrlSigning",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
       "required": [
-        "secret"
+        "parameters"
       ],
       "properties": {
-        "secretSource": {
-          "description": "Resource reference to the KV secret",
-          "type": "object",
-          "$ref": "#/definitions/ResourceReference"
-        },
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/UrlSigningActionParameters"
+        }
+      }
+    },
+    "UrlSigningActionParameters": {
+      "description": "Defines the parameters for the Url Signing action.",
+      "properties": {
         "algorithm": {
           "description": "Algorithm to use for URL signing",
           "type": "string",
@@ -7243,19 +7253,11 @@
             "$ref": "#/definitions/UrlSigningParamIdentifier"
           }
         },
-        "ipSubnets": {
-          "description": "Match values to match against. Supports CIDR ranges (both IPv4 and IPv6).",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "allowedUsers": {
-          "description": "List of allowed users",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "ipSubnetSuffix": {
+          "description": "Suffix of the CIDR range which will be used to calculate the hash",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 128
         }
       }
     },
@@ -7707,17 +7709,17 @@
       "description": "Url signing key",
       "required": [
         "keyId",
-        "keySourceParameters"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/UrlSigningActionParameters"
-        }
+        "secretSource"
       ],
       "properties": {
         "keyId": {
           "description": "Defines the customer defined key Id. This id will exist in the incoming request to indicate the key used to form the hash.",
           "type": "string"
+        },
+        "secretSource": {
+          "description": "Resource reference to the KV secret",
+          "type": "object",
+          "$ref": "#/definitions/ResourceReference"
         }
       }
     },
