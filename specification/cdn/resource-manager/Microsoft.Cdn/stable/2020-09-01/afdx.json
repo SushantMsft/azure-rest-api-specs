@@ -2480,6 +2480,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/checkHostNameAvailability": {
+      "post": {
+        "tags": [
+          "AFDProfiles"
+        ],
+        "description": "Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.",
+        "operationId": "AFDProfiles_CheckHostNameAvailability",
+        "x-ms-examples": {
+          "AFDProfiles_CheckHostNameAvailability": {
+            "$ref": "./examples/AFDProfiles_CheckHostNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomainProperties",
+            "in": "body",
+            "description": "Custom domain to be validated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateCustomDomainInput"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateCustomDomainOutput"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customdomains": {
       "get": {
         "tags": [
@@ -7772,8 +7827,15 @@
           "type": "string"
         },
         "useLatestVersion": {
-        "description": "Whether to use the latest version for the certificate",
-        "type": "boolean"
+          "description": "Whether to use the latest version for the certificate",
+          "type": "boolean"
+        },
+        "subjectAlternativeName":{
+          "description": "The list of SANs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -8833,15 +8895,16 @@
       ],
       "properties": {
         "domainValidationState": {
-          "description": "Provisioning substate shows the progress of custom HTTPS enabling/disabling process step by step.",
+          "description": "Provisioning substate shows the progress of custom HTTPS enabling/disabling process step by step. DCV stands for DomainControlValidation.",
           "readOnly": true,
           "enum": [
-            "SubmittingDomainControlValidationRequest",
-            "PendingDomainControlValidationRequestApproval",
-            "DomainControlValidationRequestApproved",
-            "DomainControlValidationRequestRejected",
-            "DomainControlValidationRequestTimedOut",
-            "PendingDomainControlReValidationRequestApproval"
+            "SubmittingDCVRequest",
+            "PendingDCVRequestApproval",
+            "DCVRequestApproved",
+            "DCVRequestRejected",
+            "DCVRequestTimedOut",
+            "PendingDomainControlReValidationRequestApproval",
+            "ManagedCertificateIssued"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -8900,7 +8963,7 @@
           "description": "The host name of the domain. Must be a domain name.",
           "type": "string"
         },
-        "httpsSettings": {
+        "tlsSettings": {
           "description": "The configuration specifying how to enable HTTPS for the domain - using AFDX managed certificate or user's own certificate. If not specified, enabling ssl uses AFDX managed certificate by default.",
           "type": "object",
           "$ref": "#/definitions/AFDDomainHttpsParameters"
