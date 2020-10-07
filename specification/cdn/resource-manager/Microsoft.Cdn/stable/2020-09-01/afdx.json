@@ -7837,22 +7837,6 @@
           "readOnly": true,
           "description": "Provisioning status of the origin.",
           "type": "string"
-        },
-        "privateEndpointStatus": {
-          "description": "The approval status for the connection to the Private Link",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Pending",
-            "Approved",
-            "Rejected",
-            "Disconnected",
-            "Timeout"
-          ],
-          "x-ms-enum": {
-            "name": "PrivateEndpointStatus",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -7913,25 +7897,16 @@
           "maximum": 1000,
           "minimum": 1
         },
+        "sharedPrivateLinkResource": {
+          "description": "The properties of the private link resource for private origin.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/SharedPrivateLinkResourceProperties"
+          }
+        },
         "enabled": {
           "description": "Origin is enabled for load balancing or not",
           "type": "boolean"
-        },
-        "privateLinkAlias": {
-          "description": "The Alias of the Private Link resource. Populating this optional field indicates that this origin is 'Private'",
-          "type": "string"
-        },
-        "privateLinkResourceId": {
-          "description": "The Resource Id of the Private Link resource. Populating this optional field indicates that this backend is 'Private'",
-          "type": "string"
-        },
-        "privateLinkLocation": {
-          "description": "The location of the Private Link resource. Required only if 'privateLinkResourceId' is populated",
-          "type": "string"
-        },
-        "privateLinkApprovalMessage": {
-          "description": "A custom message to be included in the approval request to connect to the Private Link.",
-          "type": "string"
         }
       }
     },
@@ -9412,22 +9387,6 @@
             "modelAsString": true
           }
         },
-        "privateEndpointStatus": {
-          "description": "The approval status for the connection to the Private Link",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Pending",
-            "Approved",
-            "Rejected",
-            "Disconnected",
-            "Timeout"
-          ],
-          "x-ms-enum": {
-            "name": "PrivateEndpointStatus",
-            "modelAsString": true
-          }
-        },
         "deploymentStatus":{
           "enum": [
             "NotStarted",
@@ -9505,9 +9464,12 @@
           "maximum": 1000,
           "minimum": 1
         },
-        "privateLinkSettings": {
-          "description": "Private link related settings",
-          "$ref": "#/definitions/PrivateLinkSettings"
+        "sharedPrivateLinkResource": {
+          "description": "The properties of the private link resource for private origin.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/SharedPrivateLinkResourceProperties"
+          }
         },
         "enabledState": {
           "description": "Whether to enable health probes to be made against backends defined under backendPools. Health probes can only be disabled if there is a single enabled backend in single enabled backend pool.",
@@ -9523,27 +9485,41 @@
         }
       }
     },
-    "PrivateLinkSettings":{
-      "description": "private link settings",
-      "type": "object",
+    "SharedPrivateLinkResourceProperties": {
       "properties": {
-        "privateLinkAlias": {
-          "description": "The Alias of the Private Link resource. Populating this optional field indicates that this origin is 'Private'",
-          "type": "string"
-        },
         "privateLinkResourceId": {
-          "description": "The Resource Id of the Private Link resource. Populating this optional field indicates that this backend is 'Private'",
-          "type": "string"
+          "type": "string",
+          "description": "The resource id of the resource the shared private link resource is for."
         },
         "privateLinkLocation": {
-          "description": "The location of the Private Link resource. Required only if 'privateLinkResourceId' is populated",
-          "type": "string"
+          "type": "string",
+          "description": "The location of the shared private link resource"
         },
-        "privateLinkApprovalMessage": {
-          "description": "A custom message to be included in the approval request to connect to the Private Link.",
-          "type": "string"
+        "groupId": {
+          "type": "string",
+          "description": "The group id from the provider of resource the shared private link resource is for."
+        },
+        "requestMessage": {
+          "type": "string",
+          "description": "The request message for requesting approval of the shared private link resource."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the shared private link resource. Can be Pending, Approved, Rejected, Disconnected, or Timeout.",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected",
+            "Timeout"
+          ],
+          "x-ms-enum": {
+            "name": "SharedPrivateLinkResourceStatus",
+            "modelAsString": false
+          }
         }
-      }
+      },
+      "description": "Describes the properties of an existing Shared Private Link Resource to use when connecting to a private origin."
     },
     "AFDOriginListResult": {
       "description": "Result of the request to list origins. It contains a list of origin objects and a URL link to get the next set of results.",
