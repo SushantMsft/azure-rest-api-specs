@@ -7793,7 +7793,7 @@
           "description": "Certificate issuing authority.",
           "type": "string"
         },
-        "ExpiryDate": {
+        "ExpirationDate": {
           "description": "Certificate expiration date.",
           "type": "string"
         },
