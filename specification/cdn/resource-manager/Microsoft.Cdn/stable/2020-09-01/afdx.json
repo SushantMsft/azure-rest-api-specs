@@ -1019,7 +1019,7 @@
           "Endpoints"
         ],
         "description": "Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.",
-        "operationId": "AFDEndpoints_ValidateCustomDomain",
+        "operationId": "Endpoints_ValidateCustomDomain",
         "x-ms-examples": {
           "Endpoints_ValidateCustomDomain": {
             "$ref": "./examples/Endpoints_ValidateCustomDomain.json"
@@ -9842,7 +9842,7 @@
           "description": "A directory path on the origin that AFDX can use to retrieve content from, e.g. contoso.cloudapp.net/originpath.",
           "type": "string"
         },
-        "ruleSet": {
+        "ruleSets": {
           "description": "rule set referenced by this endpoint.",
           "type": "array",
           "items": {
