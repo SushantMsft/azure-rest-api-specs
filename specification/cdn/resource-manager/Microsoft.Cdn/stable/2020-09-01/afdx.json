@@ -3352,7 +3352,7 @@
           "AFDEndpoints"
         ],
         "description": "Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.",
-        "operationId": "Endpoints_ValidateCustomDomain",
+        "operationId": "AFDEndpoints_ValidateCustomDomain",
         "x-ms-examples": {
           "Endpoints_ValidateCustomDomain": {
             "$ref": "./examples/AFDEndpoints_ValidateCustomDomain.json"
@@ -8026,7 +8026,7 @@
     },
     "ManagedCertificate": {
       "description": "Managed Certificate used for https",
-        "allOf": [
+      "allOf": [
         {
           "$ref": "#/definitions/Certificate"
         }
@@ -8034,7 +8034,7 @@
     },
     "CustomerCertificate": {
       "description": "Customer Certificate used for https",
-        "allOf": [
+      "allOf": [
         {
           "$ref": "#/definitions/Certificate"
         }
@@ -8051,7 +8051,7 @@
           "description": "Whether to use the latest version for the certificate",
           "type": "boolean"
         },
-        "subjectAlternativeName":{
+        "subjectAlternativeName": {
           "description": "The list of SANs.",
           "type": "array",
           "items": {
@@ -9319,7 +9319,7 @@
         }
       }
     },
-    "SecurityPolicyWebApplicationFirewallProperties": {
+    "SecurityPolicyWebApplicationFirewall": {
       "description": "The json object containing security policy waf parameters",
       "x-ms-discriminator-value": "WebApplicationFirewall",
       "type": "object",
@@ -9328,6 +9328,17 @@
           "$ref": "#/definitions/SecurityPolicyProperties"
         }
       ],
+      "properties": {
+        "parameters": {
+          "description": "security policy waf parameters",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecurityPolicyWebApplicationFirewallParameters"
+        }
+      }
+    },
+    "SecurityPolicyWebApplicationFirewallParameters": {
+      "description": "The json object containing security policy waf parameters",
+      "type": "object",
       "properties": {
         "wafPolicy": {
           "type": "object",
@@ -9596,7 +9607,7 @@
         }
       }
     },
-    "UrlSigningKeyProperties":{
+    "UrlSigningKeyProperties": {
       "description": "Url signing key parameters",
       "x-ms-discriminator-value": "UrlSigningKey",
       "allOf": [
@@ -9604,10 +9615,10 @@
           "$ref": "#/definitions/SecretProperties"
         }
       ],
-      "properties":{
-        "parameters":{
+      "properties": {
+        "parameters": {
           "x-ms-client-flatten": true,
-          "$ref":"#/definitions/UrlSigningKeyParameters"
+          "$ref": "#/definitions/UrlSigningKeyParameters"
         }
       }
     },
@@ -9633,7 +9644,7 @@
         }
       }
     },
-    "ManagedCertificateProperties":{
+    "ManagedCertificateProperties": {
       "description": "Managed Certificate used for https",
       "x-ms-discriminator-value": "ManagedCertificate",
       "allOf": [
@@ -9641,22 +9652,22 @@
           "$ref": "#/definitions/SecretProperties"
         }
       ],
-      "properties":{
-        "parameters":{
+      "properties": {
+        "parameters": {
           "x-ms-client-flatten": true,
-          "$ref":"#/definitions/ManagedCertificateParameters"
+          "$ref": "#/definitions/ManagedCertificateParameters"
         }
       }
     },
     "ManagedCertificateParameters": {
       "description": "Managed Certificate used for https",
-        "allOf": [
+      "allOf": [
         {
           "$ref": "#/definitions/Certificate"
         }
       ]
     },
-    "CustomerCertificateProperties":{
+    "CustomerCertificateProperties": {
       "description": "Customer Certificate used for https",
       "x-ms-discriminator-value": "CustomerCertificate",
       "allOf": [
@@ -9664,16 +9675,16 @@
           "$ref": "#/definitions/SecretProperties"
         }
       ],
-      "properties":{
-        "parameters":{
+      "properties": {
+        "parameters": {
           "x-ms-client-flatten": true,
-          "$ref":"#/definitions/CustomerCertificateParameters"
+          "$ref": "#/definitions/CustomerCertificateParameters"
         }
       }
     },
     "CustomerCertificateParameters": {
       "description": "Customer Certificate used for https",
-        "allOf": [
+      "allOf": [
         {
           "$ref": "#/definitions/Certificate"
         }
@@ -9695,7 +9706,7 @@
           "description": "Whether to use the latest version for the certificate",
           "type": "boolean"
         },
-        "subjectAlternativeName":{
+        "subjectAlternativeName": {
           "description": "The list of SANs.",
           "type": "array",
           "items": {
@@ -10743,7 +10754,7 @@
         }
       }
     },
-        "UsageName": {
+    "UsageName": {
       "properties": {
         "value": {
           "type": "string",
