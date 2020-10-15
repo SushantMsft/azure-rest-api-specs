@@ -7755,7 +7755,7 @@
           "description": "List of domains.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceReference"
+            "type": "string"
           }
         }
       }
