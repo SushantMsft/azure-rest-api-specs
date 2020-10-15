@@ -9119,12 +9119,12 @@
           "description": "Provisioning substate shows the progress of custom HTTPS enabling/disabling process step by step. DCV stands for DomainControlValidation.",
           "readOnly": true,
           "enum": [
-            "SubmittingDCVRequest",
-            "PendingDCVRequestApproval",
-            "DCVRequestApproved",
-            "DCVRequestRejected",
-            "DCVRequestTimedOut",
-            "PendingDomainControlReValidationRequestApproval",
+            "Unknown",
+            "Submitting",
+            "PendingDCV",
+            "PendingManagedCertificateIssuance",
+            "TimedOut",
+            "PendingReValidation",
             "ManagedCertificateIssued"
           ],
           "type": "string",
