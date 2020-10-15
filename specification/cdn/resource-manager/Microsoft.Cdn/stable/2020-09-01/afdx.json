@@ -5521,73 +5521,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "tags": [
-          "Secrets"
-        ],
-        "description": "Updates an existing Secret within a profile.",
-        "operationId": "Secrets_Update",
-        "x-ms-examples": {
-          "Secrets_Update": {
-            "$ref": "./examples/Secrets_Update.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "secretName",
-            "in": "path",
-            "description": "Name of the Secret under the profile.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "secretUpdateProperties",
-            "in": "body",
-            "description": "Secret properties",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SecretUpdateParameters"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Secret"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/Secret"
-            }
-          },
-          "default": {
-            "description": "CDN error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/Secret"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
       "delete": {
         "tags": [
           "Secrets"
@@ -8093,7 +8026,7 @@
     },
     "ManagedCertificate": {
       "description": "Managed Certificate used for https",
-      "allOf": [
+        "allOf": [
         {
           "$ref": "#/definitions/Certificate"
         }
@@ -8101,7 +8034,7 @@
     },
     "CustomerCertificate": {
       "description": "Customer Certificate used for https",
-      "allOf": [
+        "allOf": [
         {
           "$ref": "#/definitions/Certificate"
         }
@@ -8116,17 +8049,17 @@
         },
         "useLatestVersion": {
           "description": "Whether to use the latest version for the certificate",
-          "type": "boolean"  
+          "type": "boolean"
         },
-          "subjectAlternativeName":{
-            "description": "The list of SANs.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+        "subjectAlternativeName":{
+          "description": "The list of SANs.",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
-      },
+      }
+    },
     "LoadParameters": {
       "type": "object",
       "description": "Parameters required for content load.",
@@ -9627,23 +9560,23 @@
     },
     "SecretProperties": {
       "description": "The JSON object that contains the properties of the Secret to create.",
+      "discriminator": "secretType",
       "required": [
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SecretUpdatePropertiesParameters"
-        }
+        "secretType"
       ],
       "properties": {
-        "type": {
+        "secretType": {
           "description": "The type of the Secret to create.",
           "enum": [
             "UrlSigningKey",
             "CustomerCertificate",
             "ManagedCertificate"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "secretType",
+            "modelAsString": true
+          }
         },
         "provisioningState": {
           "readOnly": true,
@@ -9663,18 +9596,113 @@
         }
       }
     },
-    "SecretUpdateParameters": {
-      "description": "The domain JSON object required for Secret update.",
-      "type": "object",
-      "properties": {
-        "properties": {
+    "UrlSigningKeyProperties":{
+      "description": "Url signing key parameters",
+      "x-ms-discriminator-value": "UrlSigningKey",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretProperties"
+        }
+      ],
+      "properties":{
+        "parameters":{
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SecretUpdatePropertiesParameters"
+          "$ref":"#/definitions/UrlSigningKeyParameters"
         }
       }
     },
-    "SecretUpdatePropertiesParameters": {
-      "description": "The JSON object that contains the properties of the domain to create."
+    "UrlSigningKeyParameters": {
+      "description": "Url signing key parameters",
+      "required": [
+        "keyId",
+        "secretSource"
+      ],
+      "properties": {
+        "keyId": {
+          "description": "Defines the customer defined key Id. This id will exist in the incoming request to indicate the key used to form the hash.",
+          "type": "string"
+        },
+        "secretSource": {
+          "description": "Resource reference to the KV secret",
+          "type": "object",
+          "$ref": "#/definitions/ResourceReference"
+        },
+        "secretVersion": {
+          "description": "Version of the secret to be used",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedCertificateProperties":{
+      "description": "Managed Certificate used for https",
+      "x-ms-discriminator-value": "ManagedCertificate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretProperties"
+        }
+      ],
+      "properties":{
+        "parameters":{
+          "x-ms-client-flatten": true,
+          "$ref":"#/definitions/ManagedCertificateParameters"
+        }
+      }
+    },
+    "ManagedCertificateParameters": {
+      "description": "Managed Certificate used for https",
+        "allOf": [
+        {
+          "$ref": "#/definitions/Certificate"
+        }
+      ]
+    },
+    "CustomerCertificateProperties":{
+      "description": "Customer Certificate used for https",
+      "x-ms-discriminator-value": "CustomerCertificate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretProperties"
+        }
+      ],
+      "properties":{
+        "parameters":{
+          "x-ms-client-flatten": true,
+          "$ref":"#/definitions/CustomerCertificateParameters"
+        }
+      }
+    },
+    "CustomerCertificateParameters": {
+      "description": "Customer Certificate used for https",
+        "allOf": [
+        {
+          "$ref": "#/definitions/Certificate"
+        }
+      ],
+      "required": [
+        "secretSource"
+      ],
+      "properties": {
+        "secretSource": {
+          "description": "Resource reference to the KV secret",
+          "type": "object",
+          "$ref": "#/definitions/ResourceReference"
+        },
+        "secretVersion": {
+          "description": "Version of the secret to be used",
+          "type": "string"
+        },
+        "useLatestVersion": {
+          "description": "Whether to use the latest version for the certificate",
+          "type": "boolean"
+        },
+        "subjectAlternativeName":{
+          "description": "The list of SANs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "RuleSetListResult": {
       "description": "Result of the request to list rule sets. It contains a list of rule set objects and a URL link to get the next set of results.",
@@ -9818,7 +9846,7 @@
             "name": "provisioningState",
             "modelAsString": true
           }
-        },    
+        },
         "deploymentStatus": {
           "enum": [
             "NotStarted",
@@ -10715,7 +10743,7 @@
         }
       }
     },
-    "UsageName": {
+        "UsageName": {
       "properties": {
         "value": {
           "type": "string",
