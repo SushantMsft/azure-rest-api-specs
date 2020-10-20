@@ -6271,6 +6271,7 @@
       }
     },
     "Endpoint": {
+      "description": "CDN endpoint is the entity within a CDN profile containing configuration information such as origin, protocol, content caching and delivery behavior. The CDN endpoint uses the URL format <endpointname>.azureedge.net.",
       "type": "object",
       "allOf": [
         {
@@ -6430,7 +6431,9 @@
         "urlSigningKeys": {
           "description": "List of keys used to validate the signed URL hashes.",
           "type": "array",
-          "$ref": "#/definitions/UrlSigningKey"
+          "items": {
+            "$ref": "#/definitions/UrlSigningKey"
+          }
         },
         "deliveryPolicy": {
           "description": "A policy that specifies the delivery rules to be used for an endpoint.",
@@ -6784,8 +6787,7 @@
     "RemoteAddressMatchConditionParameters": {
       "description": "Defines the parameters for RemoteAddress match conditions",
       "required": [
-        "operator",
-        "matchValues"
+        "operator"
       ],
       "properties": {
         "operator": {
@@ -6824,8 +6826,7 @@
     "RequestMethodMatchConditionParameters": {
       "description": "Defines the parameters for RequestMethod match conditions",
       "required": [
-        "operator",
-        "matchValues"
+        "operator"
       ],
       "properties": {
         "operator": {
@@ -6864,8 +6865,7 @@
     "QueryStringMatchConditionParameters": {
       "description": "Defines the parameters for QueryString match conditions",
       "required": [
-        "operator",
-        "matchValues"
+        "operator"
       ],
       "properties": {
         "operator": {
@@ -6911,9 +6911,7 @@
     "PostArgsMatchConditionParameters": {
       "description": "Defines the parameters for PostArgs match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "selector"
+        "operator"
       ],
       "properties": {
         "selector": {
@@ -6963,8 +6961,7 @@
     "RequestUriMatchConditionParameters": {
       "description": "Defines the parameters for RequestUri match conditions",
       "required": [
-        "operator",
-        "matchValues"
+        "operator"
       ],
       "properties": {
         "operator": {
@@ -7010,9 +7007,7 @@
     "RequestHeaderMatchConditionParameters": {
       "description": "Defines the parameters for RequestHeader match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "selector"
+        "operator"
       ],
       "properties": {
         "selector": {
@@ -7062,8 +7057,7 @@
     "RequestBodyMatchConditionParameters": {
       "description": "Defines the parameters for RequestBody match conditions",
       "required": [
-        "operator",
-        "matchValues"
+        "operator"
       ],
       "properties": {
         "operator": {
@@ -7109,8 +7103,7 @@
     "RequestSchemeMatchConditionParameters": {
       "description": "Defines the parameters for RequestScheme match conditions ",
       "required": [
-        "operator",
-        "matchValues"
+        "operator"
       ],
       "properties": {
         "operator": {
@@ -7140,8 +7133,7 @@
     "UrlPathMatchConditionParameters": {
       "description": "Defines the parameters for UrlPath match conditions",
       "required": [
-        "operator",
-        "matchValues"
+        "operator"
       ],
       "properties": {
         "operator": {
@@ -7188,8 +7180,7 @@
     "UrlFileExtensionMatchConditionParameters": {
       "description": "Defines the parameters for UrlFileExtension match conditions",
       "required": [
-        "operator",
-        "matchValues"
+        "operator"
       ],
       "properties": {
         "operator": {
@@ -7235,8 +7226,7 @@
     "UrlFileNameMatchConditionParameters": {
       "description": "Defines the parameters for UrlFilename match conditions",
       "required": [
-        "operator",
-        "matchValues"
+        "operator"
       ],
       "properties": {
         "operator": {
@@ -7282,8 +7272,7 @@
     "HttpVersionMatchConditionParameters": {
       "description": "Defines the parameters for HttpVersion match conditions",
       "required": [
-        "operator",
-        "matchValues"
+        "operator"
       ],
       "properties": {
         "operator": {
@@ -7313,9 +7302,7 @@
     "CookiesMatchConditionParameters": {
       "description": "Defines the parameters for Cookies match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "selector"
+        "operator"
       ],
       "properties": {
         "selector": {
@@ -7365,8 +7352,7 @@
     "IsDeviceMatchConditionParameters": {
       "description": "Defines the parameters for IsDevice match conditions",
       "required": [
-        "operator",
-        "matchValues"
+        "operator"
       ],
       "properties": {
         "operator": {
@@ -7500,7 +7486,7 @@
       }
     },
     "UrlSigningAction": {
-      "description": "Defines the url redirect action for the delivery rule.",
+      "description": "Defines the url signing action for the delivery rule.",
       "x-ms-discriminator-value": "UrlSigning",
       "allOf": [
         {
@@ -7519,13 +7505,30 @@
     },
     "UrlSigningActionParameters": {
       "description": "Defines the parameters for the Url Signing action.",
+      "required": [
+        "keyId"
+      ],
       "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlSigningActionParameters"
+          ]
+        },
+        "keyId": {
+          "description": "Id reference of the key to be used to verify the hash and should be defined in UrlSigningKeys",
+          "type": "string"
+        },
         "algorithm": {
           "description": "Algorithm to use for URL signing",
           "type": "string",
           "enum": [
             "SHA256"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "algorithm",
+            "modelAsString": true
+          }
         },
         "parameterNameOverride": {
           "description": "Defines which query string parameters in the url to be considered for expires, key id etc. ",
@@ -7534,11 +7537,12 @@
             "$ref": "#/definitions/UrlSigningParamIdentifier"
           }
         },
-        "ipSubnetSuffix": {
-          "description": "Suffix of the CIDR range which will be used to calculate the hash",
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 128
+        "ipSubnets": {
+          "description": "Match values to match against. Supports CIDR ranges (both IPv4 and IPv6).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -7553,10 +7557,14 @@
           "description": "Indicates the purpose of the parameter",
           "type": "string",
           "enum": [
-            "expires",
-            "keyId",
-            "signature"
-          ]
+            "Expires",
+            "KeyId",
+            "Signature"
+          ],
+          "x-ms-enum": {
+            "name": "paramIndicator",
+            "modelAsString": true
+          }
         },
         "paramName": {
           "description": "Parameter name",
@@ -7846,6 +7854,22 @@
         "enabled": {
           "description": "Origin is enabled for load balancing or not. By default, origin is always enabled.",
           "type": "boolean"
+        },
+        "privateLinkAlias": {
+          "description": "The Alias of the Private Link resource. Populating this optional field indicates that this origin is 'Private'",
+          "type": "string"
+        },
+        "privateLinkResourceId": {
+          "description": "The Resource Id of the Private Link resource. Populating this optional field indicates that this backend is 'Private'",
+          "type": "string"
+        },
+        "privateLinkLocation": {
+          "description": "The location of the Private Link resource. Required only if 'privateLinkResourceId' is populated",
+          "type": "string"
+        },
+        "privateLinkApprovalMessage": {
+          "description": "A custom message to be included in the approval request to connect to the Private Link.",
+          "type": "string"
         }
       },
       "x-ms-azure-resource": true
@@ -7966,8 +7990,7 @@
       "type": "object",
       "description": "Parameters required for content purge.",
       "required": [
-        "contentPaths",
-        "domains"
+        "contentPaths"
       ],
       "properties": {
         "contentPaths": {
@@ -7990,17 +8013,55 @@
       "description": "Url signing key",
       "required": [
         "keyId",
-        "secretSource"
+        "keySourceParameters"
       ],
       "properties": {
         "keyId": {
           "description": "Defines the customer defined key Id. This id will exist in the incoming request to indicate the key used to form the hash.",
           "type": "string"
         },
-        "secretSource": {
-          "description": "Resource reference to the KV secret",
-          "type": "object",
-          "$ref": "#/definitions/ResourceReference"
+        "keySourceParameters": {
+          "description": "Defines the parameters for using customer key vault for Url Signing Key.",
+          "$ref": "#/definitions/KeyVaultSigningKeyParameters"
+        }
+      }
+    },
+    "KeyVaultSigningKeyParameters": {
+      "description": "Describes the parameters for using a user's KeyVault for URL Signing Key.",
+      "required": [
+        "@odata.type",
+        "subscriptionId",
+        "resourceGroupName",
+        "vaultName",
+        "secretName",
+        "secretVersion"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.KeyVaultSigningKeyParameters"
+          ]
+        },
+        "subscriptionId": {
+          "description": "Subscription Id of the user's Key Vault containing the secret",
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "description": "Resource group of the user's Key Vault containing the secret",
+          "type": "string"
+        },
+        "vaultName": {
+          "description": "The name of the user's Key Vault containing the secret",
+          "type": "string"
+        },
+        "secretName": {
+          "description": "The name of secret in Key Vault.",
+          "type": "string"
+        },
+        "secretVersion": {
+          "description": "The version(GUID) of secret in Key Vault.",
+          "type": "string"
         }
       }
     },
@@ -8009,14 +8070,6 @@
       "properties": {
         "Subject": {
           "description": "Subject name in the certificate.",
-          "type": "string"
-        },
-        "Version": {
-          "description": "Certificate version.",
-          "type": "string"
-        },
-        "CertificateAuthority": {
-          "description": "Certificate issuing authority.",
           "type": "string"
         },
         "ExpirationDate": {
@@ -8048,6 +8101,14 @@
         "certificateUrl"
       ],
       "properties": {
+        "Version": {
+          "description": "Certificate version.",
+          "type": "string"
+        },
+        "CertificateAuthority": {
+          "description": "Certificate issuing authority.",
+          "type": "string"
+        },
         "certificateUrl": {
           "description": "Complete Url to the certificate",
           "type": "string"
@@ -8086,7 +8147,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -8125,6 +8186,22 @@
           "readOnly": true,
           "description": "Provisioning status of the origin.",
           "type": "string"
+        },
+        "privateEndpointStatus": {
+          "description": "The approval status for the connection to the Private Link",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected",
+            "Timeout"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateEndpointStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -8132,13 +8209,6 @@
       "type": "object",
       "description": "Origin properties needed for origin update.",
       "properties": {
-        "tags": {
-          "description": "Origin tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/OriginUpdatePropertiesParameters"
@@ -8185,16 +8255,25 @@
           "maximum": 1000,
           "minimum": 1
         },
-        "sharedPrivateLinkResource": {
-          "description": "The properties of the private link resource for private origin.",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/SharedPrivateLinkResourceProperties"
-          }
-        },
         "enabled": {
           "description": "Origin is enabled for load balancing or not",
           "type": "boolean"
+        },
+        "privateLinkAlias": {
+          "description": "The Alias of the Private Link resource. Populating this optional field indicates that this origin is 'Private'",
+          "type": "string"
+        },
+        "privateLinkResourceId": {
+          "description": "The Resource Id of the Private Link resource. Populating this optional field indicates that this backend is 'Private'",
+          "type": "string"
+        },
+        "privateLinkLocation": {
+          "description": "The location of the Private Link resource. Required only if 'privateLinkResourceId' is populated",
+          "type": "string"
+        },
+        "privateLinkApprovalMessage": {
+          "description": "A custom message to be included in the approval request to connect to the Private Link.",
+          "type": "string"
         }
       }
     },
@@ -8341,18 +8420,6 @@
           "type": "integer",
           "maximum": 255,
           "minimum": 1
-        },
-        "enabledState": {
-          "description": "Whether to enable health probes to be made against backends defined under backendPools. Health probes can only be disabled if there is a single enabled backend in single enabled backend pool.",
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "HealthProbeEnabled",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -8586,12 +8653,12 @@
         }
       ],
       "required": [
-        "certificate"
+        "certificateSourceParameters"
       ],
       "properties": {
-        "certificate": {
-          "description": "The certificate used for enabling SSL.",
-          "$ref": "#/definitions/ManagedCertificate"
+        "certificateSourceParameters": {
+          "description": "Defines the certificate source parameters using CDN managed certificate for enabling SSL.",
+          "$ref": "#/definitions/CdnCertificateSourceParameters"
         }
       }
     },
@@ -8624,12 +8691,74 @@
         }
       ],
       "required": [
-        "certificate"
+        "certificateSourceParameters"
       ],
       "properties": {
-        "certificate": {
-          "description": "Defines the certificate from the user's keyvault for enabling SSL.",
-          "$ref": "#/definitions/CustomerCertificate"
+        "certificateSourceParameters": {
+          "description": "Defines the certificate source parameters using user's keyvault certificate for enabling SSL.",
+          "$ref": "#/definitions/KeyVaultCertificateSourceParameters"
+        }
+      }
+    },
+    "KeyVaultCertificateSourceParameters": {
+      "description": "Describes the parameters for using a user's KeyVault certificate for securing custom domain.",
+      "required": [
+        "@odata.type",
+        "subscriptionId",
+        "resourceGroupName",
+        "vaultName",
+        "secretName",
+        "updateRule",
+        "deleteRule"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.KeyVaultCertificateSourceParameters"
+          ]
+        },
+        "subscriptionId": {
+          "description": "Subscription Id of the user's Key Vault containing the SSL certificate",
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "description": "Resource group of the user's Key Vault containing the SSL certificate",
+          "type": "string"
+        },
+        "vaultName": {
+          "description": "The name of the user's Key Vault containing the SSL certificate",
+          "type": "string"
+        },
+        "secretName": {
+          "description": "The name of Key Vault Secret (representing the full certificate PFX) in Key Vault.",
+          "type": "string"
+        },
+        "secretVersion": {
+          "description": "The version(GUID) of Key Vault Secret in Key Vault.",
+          "type": "string"
+        },
+        "updateRule": {
+          "description": "Describes the action that shall be taken when the certificate is updated in Key Vault.",
+          "type": "string",
+          "enum": [
+            "NoAction"
+          ],
+          "x-ms-enum": {
+            "name": "UpdateRule",
+            "modelAsString": true
+          }
+        },
+        "deleteRule": {
+          "description": "Describes the action that shall be taken when the certificate is removed from Key Vault.",
+          "type": "string",
+          "enum": [
+            "NoAction"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteRule",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -9029,8 +9158,8 @@
             "Standard_ChinaCdn",
             "Standard_Microsoft",
             "Premium_ChinaCdn",
-            "Standard_AzureFrontdoor",
-            "Premium_AzureFrontdoor",
+            "Standard_AzureFrontDoor",
+            "Premium_AzureFrontDoor",
             "Standard_955BandWidth_ChinaCdn",
             "Standard_AvgBandWidth_ChinaCdn",
             "StandardPlus_ChinaCdn",
@@ -9126,11 +9255,11 @@
           "enum": [
             "Unknown",
             "Submitting",
-            "PendingDCV",
+            "Pending",
             "PendingManagedCertificateIssuance",
             "TimedOut",
             "PendingReValidation",
-            "ManagedCertificateIssued"
+            "Approved"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -9224,7 +9353,7 @@
     "AFDDomainHttpsParameters": {
       "description": "The JSON object that contains the properties to secure a domain.",
       "required": [
-        "certificateSource",
+        "certificateType",
         "protocolType"
       ],
       "properties": {
@@ -9236,7 +9365,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "CertificateSource",
+            "name": "certificateType",
             "modelAsString": true
           }
         },
@@ -9278,10 +9407,10 @@
       "description": "The json object that contains properties required to create a security policy",
       "discriminator": "type",
       "required": [
-        "type"
+        "policyType"
       ],
       "properties": {
-        "type": {
+        "policyType": {
           "description": "The type of the Security policy to create.",
           "enum": [
             "WebApplicationFirewall"
@@ -10103,7 +10232,7 @@
           "type": "object",
           "$ref": "#/definitions/ResponseBasedOriginErrorDetectionParameters"
         },
-        "sessionAffinityEnabledState": {
+        "sessionAffinityState": {
           "description": "Whether to allow session affinity on this host. Valid options are 'Enabled' or 'Disabled'",
           "enum": [
             "Enabled",
@@ -10129,7 +10258,7 @@
           "description": "The number of samples within the sample period that must succeed",
           "type": "integer"
         },
-        "additionalLatencyMilliseconds": {
+        "additionalLatencyInMilliseconds": {
           "description": "The additional latency in milliseconds for probes to fall into the lowest latency bucket",
           "type": "integer"
         }
@@ -10305,7 +10434,7 @@
             "modelAsString": true
           }
         },
-        "LinkToDefaultDomain": {
+        "linkToDefaultDomain": {
           "description": "whether this route will be linked to the default endpoint domain.",
           "type": "string",
           "enum": [
