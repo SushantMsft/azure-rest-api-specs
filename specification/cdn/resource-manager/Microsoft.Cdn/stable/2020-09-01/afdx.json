@@ -9246,6 +9246,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/AFDDomainUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
         }
       ],
       "properties": {
@@ -9264,35 +9267,6 @@
           "type": "string",
           "x-ms-enum": {
             "name": "DomainValidationState",
-            "modelAsString": true
-          }
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "description": "Provisioning status",
-          "type": "string",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Updating",
-            "Deleting",
-            "Creating"
-          ],
-          "x-ms-enum": {
-            "name": "provisioningState",
-            "modelAsString": true
-          }
-        },
-        "deploymentStatus": {
-          "enum": [
-            "NotStarted",
-            "InProgress",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DeploymentStatus",
             "modelAsString": true
           }
         }
@@ -9409,6 +9383,11 @@
       "required": [
         "policyType"
       ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
       "properties": {
         "policyType": {
           "description": "The type of the Security policy to create.",
@@ -9418,36 +9397,6 @@
           "type": "string",
           "x-ms-enum": {
             "name": "type",
-            "modelAsString": true
-          }
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "description": "Provisioning status",
-          "type": "string",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Updating",
-            "Deleting",
-            "Creating"
-          ],
-          "x-ms-enum": {
-            "name": "provisioningState",
-            "modelAsString": true
-          }
-        },
-        "deploymentStatus": {
-          "readOnly": true,
-          "enum": [
-            "NotStarted",
-            "InProgress",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DeploymentStatus",
             "modelAsString": true
           }
         }
@@ -9545,6 +9494,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/AFDEndpointPropertiesUpdateParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
         }
       ],
       "properties": {
@@ -9552,35 +9504,6 @@
           "description": "The host name of the endpoint structured as {endpointName}.{DNSZone}, e.g. contoso.azureedge.net",
           "type": "string",
           "readOnly": true
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "description": "Provisioning status",
-          "type": "string",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Updating",
-            "Deleting",
-            "Creating"
-          ],
-          "x-ms-enum": {
-            "name": "provisioningState",
-            "modelAsString": true
-          }
-        },
-        "deploymentStatus": {
-          "enum": [
-            "NotStarted",
-            "InProgress",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DeploymentStatus",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -9709,37 +9632,11 @@
       "required": [
         "secretType"
       ],
-      "properties": {
-        "secretType": {
-          "description": "The type of the Secret to create.",
-          "enum": [
-            "UrlSigningKey",
-            "CustomerCertificate",
-            "ManagedCertificate"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "secretType",
-            "modelAsString": true
-          }
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "description": "Provisioning status",
-          "type": "string",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Updating",
-            "Deleting",
-            "Creating"
-          ],
-          "x-ms-enum": {
-            "name": "provisioningState",
-            "modelAsString": true
-          }
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDStateProperties"
         }
-      }
+      ]
     },
     "UrlSigningKeyProperties": {
       "description": "Url signing key parameters",
@@ -9890,39 +9787,11 @@
       "allOf": [
         {
           "$ref": "#/definitions/RuleSetUpdatePropertiesParameters"
-        }
-      ],
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "description": "Provisioning status",
-          "type": "string",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Updating",
-            "Deleting",
-            "Creating"
-          ],
-          "x-ms-enum": {
-            "name": "provisioningState",
-            "modelAsString": true
-          }
         },
-        "deploymentStatus": {
-          "enum": [
-            "NotStarted",
-            "InProgress",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DeploymentStatus",
-            "modelAsString": true
-          }
+        {
+          "$ref": "#/definitions/AFDStateProperties"
         }
-      }
+      ]
     },
     "RuleSetUpdateParameters": {
       "description": "The rule set JSON object required for rule set creation or update.",
@@ -9973,39 +9842,11 @@
       "allOf": [
         {
           "$ref": "#/definitions/AFDOriginUpdatePropertiesParameters"
-        }
-      ],
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "description": "Provisioning status",
-          "type": "string",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Updating",
-            "Deleting",
-            "Creating"
-          ],
-          "x-ms-enum": {
-            "name": "provisioningState",
-            "modelAsString": true
-          }
         },
-        "deploymentStatus": {
-          "enum": [
-            "NotStarted",
-            "InProgress",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DeploymentStatus",
-            "modelAsString": true
-          }
+        {
+          "$ref": "#/definitions/AFDStateProperties"
         }
-      }
+      ]
     },
     "AFDOriginUpdateParameters": {
       "type": "object",
@@ -10164,39 +10005,11 @@
       "allOf": [
         {
           "$ref": "#/definitions/AFDOriginGroupUpdatePropertiesParameters"
-        }
-      ],
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "description": "Provisioning status",
-          "type": "string",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Updating",
-            "Deleting",
-            "Creating"
-          ],
-          "x-ms-enum": {
-            "name": "provisioningState",
-            "modelAsString": true
-          }
         },
-        "deploymentStatus": {
-          "enum": [
-            "NotStarted",
-            "InProgress",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DeploymentStatus",
-            "modelAsString": true
-          }
+        {
+          "$ref": "#/definitions/AFDStateProperties"
         }
-      }
+      ]
     },
     "AFDOriginGroupUpdateParameters": {
       "type": "object",
@@ -10318,42 +10131,14 @@
       "allOf": [
         {
           "$ref": "#/definitions/RouteUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
         }
       ],
       "required": [
         "originGroup"
-      ],
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "description": "Provisioning status",
-          "type": "string",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Updating",
-            "Deleting",
-            "Creating"
-          ],
-          "x-ms-enum": {
-            "name": "provisioningState",
-            "modelAsString": true
-          }
-        },
-        "deploymentStatus": {
-          "enum": [
-            "NotStarted",
-            "InProgress",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DeploymentStatus",
-            "modelAsString": true
-          }
-        }
-      }
+      ]
     },
     "RouteUpdateParameters": {
       "description": "The domain JSON object required for domain creation or update.",
@@ -10515,39 +10300,11 @@
       "allOf": [
         {
           "$ref": "#/definitions/RuleUpdatePropertiesParameters"
-        }
-      ],
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "description": "Provisioning status",
-          "type": "string",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Updating",
-            "Deleting",
-            "Creating"
-          ],
-          "x-ms-enum": {
-            "name": "provisioningState",
-            "modelAsString": true
-          }
         },
-        "deploymentStatus": {
-          "enum": [
-            "NotStarted",
-            "InProgress",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DeploymentStatus",
-            "modelAsString": true
-          }
+        {
+          "$ref": "#/definitions/AFDStateProperties"
         }
-      }
+      ]
     },
     "RuleUpdateParameters": {
       "description": "The domain JSON object required for domain creation or update.",
@@ -10593,6 +10350,41 @@
           ],
           "x-ms-enum": {
             "name": "MatchProcessingBehavior",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AFDStateProperties": {
+      "description": "The tracking states for afd resources.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "description": "Provisioning status",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "deploymentStatus": {
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeploymentStatus",
             "modelAsString": true
           }
         }
