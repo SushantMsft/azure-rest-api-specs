@@ -9431,7 +9431,6 @@
             "Unknown",
             "Submitting",
             "Pending",
-            "PendingManagedCertificateIssuance",
             "TimedOut",
             "PendingReValidation",
             "Approved"
