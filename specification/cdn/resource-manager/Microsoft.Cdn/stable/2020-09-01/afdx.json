@@ -2883,62 +2883,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customdomains/{customDomainName}/usages": {
-      "post": {
-        "tags": [
-          "AFDCustomDomains"
-        ],
-        "description": "Checks the quota and actual usage of endpoints under the given CDN profile.",
-        "operationId": "AFDCustomDomains_ListResourceUsage",
-        "x-ms-examples": {
-          "Profiles_ListResourceUsage": {
-            "$ref": "./examples/AFDCustomDomains_ListResourceUsage.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "customDomainName",
-            "in": "path",
-            "description": "Name of the domain under the profile which is unique globally.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/UsagesListResult"
-            }
-          },
-          "default": {
-            "description": "CDN error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints": {
       "get": {
         "tags": [
@@ -9432,7 +9376,7 @@
             "Submitting",
             "Pending",
             "TimedOut",
-            "PendingReValidation",
+            "PendingRevalidation",
             "Approved"
           ],
           "type": "string",
@@ -9440,6 +9384,16 @@
             "name": "DomainValidationState",
             "modelAsString": true
           }
+        },
+        "hostName": {
+          "description": "The host name of the domain. Must be a domain name.",
+          "type": "string"
+        },
+        "validationProperties": {
+          "description": "Values the customer needs to validate domain ownership",
+          "readOnly": true,
+          "type": "object",
+          "$ref": "#/definitions/DomainValidationProperties"
         }
       }
     },
@@ -9455,23 +9409,11 @@
     },
     "AFDDomainUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the domain to create.",
-      "required": [
-        "hostName"
-      ],
       "properties": {
-        "hostName": {
-          "description": "The host name of the domain. Must be a domain name.",
-          "type": "string"
-        },
         "tlsSettings": {
           "description": "The configuration specifying how to enable HTTPS for the domain - using AFDX managed certificate or user's own certificate. If not specified, enabling ssl uses AFDX managed certificate by default.",
           "type": "object",
           "$ref": "#/definitions/AFDDomainHttpsParameters"
-        },
-        "validationProperties": {
-          "description": "Values the customer needs to validate domain ownership",
-          "type": "object",
-          "$ref": "#/definitions/DomainValidationProperties"
         },
         "azureDnsZone": {
           "description": "Resource reference to the Azure DNS zone",
