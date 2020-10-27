@@ -8176,7 +8176,7 @@
           "description": "Whether to use the latest version for the certificate",
           "type": "boolean"
         },
-        "subjectAlternativeName": {
+        "subjectAlternativeNames": {
           "description": "The list of SANs.",
           "type": "array",
           "items": {
@@ -9882,7 +9882,7 @@
           "description": "Whether to use the latest version for the certificate",
           "type": "boolean"
         },
-        "subjectAlternativeName": {
+        "subjectAlternativeNames": {
           "description": "The list of SANs.",
           "type": "array",
           "items": {
