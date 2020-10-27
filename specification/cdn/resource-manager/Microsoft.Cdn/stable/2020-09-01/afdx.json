@@ -5585,7 +5585,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/validateSecret": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/validateSecret": {
       "post": {
         "tags": [
           "Secrets"
@@ -5600,13 +5600,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "properties",
@@ -8167,11 +8160,11 @@
         "certificateUrl"
       ],
       "properties": {
-        "Version": {
+        "version": {
           "description": "Certificate version.",
           "type": "string"
         },
-        "CertificateAuthority": {
+        "certificateAuthority": {
           "description": "Certificate issuing authority.",
           "type": "string"
         },
@@ -8914,6 +8907,7 @@
           "description": "The validation status.",
           "enum": [
             "Valid",
+            "Invalid",
             "AccessDenied",
             "CertificateExpired"
           ],
@@ -9880,7 +9874,7 @@
           "description": "Version of the secret to be used",
           "type": "string"
         },
-        "CertificateAuthority": {
+        "certificateAuthority": {
           "description": "Certificate issuing authority.",
           "type": "string"
         },
