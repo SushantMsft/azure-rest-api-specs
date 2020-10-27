@@ -5585,7 +5585,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/validateSecret": {
+    "/subscriptions/{subscriptionId}/{resourceGroupName}/providers/Microsoft.Cdn/validateSecret": {
       "post": {
         "tags": [
           "Secrets"
