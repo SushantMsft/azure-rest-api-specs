@@ -9997,13 +9997,6 @@
       "type": "object",
       "description": "AFDOrigin properties needed for origin update.",
       "properties": {
-        "tags": {
-          "description": "AFDOrigin tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AFDOriginUpdatePropertiesParameters"
