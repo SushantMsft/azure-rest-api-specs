@@ -10071,8 +10071,9 @@
     },
     "SharedPrivateLinkResourceProperties": {
       "properties": {
-        "privateLinkResourceId": {
-          "type": "string",
+        "privateLink": {
+          "type": "object",
+          "$ref": "#/definitions/ResourceReference",
           "description": "The resource id of the resource the shared private link resource is for."
         },
         "privateLinkLocation": {
