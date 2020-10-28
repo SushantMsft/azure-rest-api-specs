@@ -7568,16 +7568,6 @@
         "keyId"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlSigningActionParameters"
-          ]
-        },
-        "keyId": {
-          "description": "Id reference of the key to be used to verify the hash and should be defined in UrlSigningKeys",
-          "type": "string"
-        },
         "algorithm": {
           "description": "Algorithm to use for URL signing",
           "type": "string",
@@ -7594,13 +7584,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/UrlSigningParamIdentifier"
-          }
-        },
-        "ipSubnets": {
-          "description": "Match values to match against. Supports CIDR ranges (both IPv4 and IPv6).",
-          "type": "array",
-          "items": {
-            "type": "string"
           }
         }
       }
