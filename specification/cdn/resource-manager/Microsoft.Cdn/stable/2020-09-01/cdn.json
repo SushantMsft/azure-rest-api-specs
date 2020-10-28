@@ -2446,6 +2446,11 @@
           "description": "The pricing tier (defines a CDN provider, feature list and rate) of the CDN profile.",
           "$ref": "#/definitions/Sku"
         },
+        "frontdoorId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Id of the frontdoor."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProfileProperties"
@@ -2697,7 +2702,9 @@
         "urlSigningKeys": {
           "description": "List of keys used to validate the signed URL hashes.",
           "type": "array",
-          "$ref": "#/definitions/UrlSigningKey"
+          "items": {
+            "$ref": "#/definitions/UrlSigningKey"
+          }
         },
         "deliveryPolicy": {
           "description": "A policy that specifies the delivery rules to be used for an endpoint.",
@@ -3051,17 +3058,9 @@
     "RemoteAddressMatchConditionParameters": {
       "description": "Defines the parameters for RemoteAddress match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "@odata.type"
+        "operator"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRemoteAddressConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -3098,17 +3097,9 @@
     "RequestMethodMatchConditionParameters": {
       "description": "Defines the parameters for RequestMethod match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "@odata.type"
+        "operator"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestMethodConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -3145,17 +3136,9 @@
     "QueryStringMatchConditionParameters": {
       "description": "Defines the parameters for QueryString match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "@odata.type"
+        "operator"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleQueryStringConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -3168,7 +3151,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "QueryStringOperator",
@@ -3198,18 +3182,9 @@
     "PostArgsMatchConditionParameters": {
       "description": "Defines the parameters for PostArgs match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "selector",
-        "@odata.type"
+        "operator"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRulePostArgsConditionParameters"
-          ]
-        },
         "selector": {
           "description": "Name of PostArg to be matched",
           "type": "string"
@@ -3226,7 +3201,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "PostArgsOperator",
@@ -3256,17 +3232,9 @@
     "RequestUriMatchConditionParameters": {
       "description": "Defines the parameters for RequestUri match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "@odata.type"
+        "operator"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestUriConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -3279,7 +3247,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "RequestUriOperator",
@@ -3309,18 +3278,9 @@
     "RequestHeaderMatchConditionParameters": {
       "description": "Defines the parameters for RequestHeader match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "selector",
-        "@odata.type"
+        "operator"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestHeaderConditionParameters"
-          ]
-        },
         "selector": {
           "description": "Name of Header to be matched",
           "type": "string"
@@ -3337,7 +3297,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "RequestHeaderOperator",
@@ -3367,17 +3328,9 @@
     "RequestBodyMatchConditionParameters": {
       "description": "Defines the parameters for RequestBody match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "@odata.type"
+        "operator"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestBodyConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -3390,7 +3343,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "RequestBodyOperator",
@@ -3420,17 +3374,9 @@
     "RequestSchemeMatchConditionParameters": {
       "description": "Defines the parameters for RequestScheme match conditions ",
       "required": [
-        "operator",
-        "matchValues",
-        "@odata.type"
+        "operator"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestSchemeConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -3458,17 +3404,9 @@
     "UrlPathMatchConditionParameters": {
       "description": "Defines the parameters for UrlPath match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "@odata.type"
+        "operator"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlPathMatchConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -3482,7 +3420,8 @@
             "LessThanOrEqual",
             "GreaterThan",
             "GreaterThanOrEqual",
-            "Wildcard"
+            "Wildcard",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "UrlPathOperator",
@@ -3512,17 +3451,9 @@
     "UrlFileExtensionMatchConditionParameters": {
       "description": "Defines the parameters for UrlFileExtension match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "@odata.type"
+        "operator"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlFileExtensionMatchConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -3535,7 +3466,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "UrlFileExtensionOperator",
@@ -3565,17 +3497,9 @@
     "UrlFileNameMatchConditionParameters": {
       "description": "Defines the parameters for UrlFilename match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "@odata.type"
+        "operator"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlFilenameConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -3588,7 +3512,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "UrlFileNameOperator",
@@ -3618,17 +3543,9 @@
     "HttpVersionMatchConditionParameters": {
       "description": "Defines the parameters for HttpVersion match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "@odata.type"
+        "operator"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleHttpVersionConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -3656,18 +3573,9 @@
     "CookiesMatchConditionParameters": {
       "description": "Defines the parameters for Cookies match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "selector",
-        "@odata.type"
+        "operator"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleCookiesConditionParameters"
-          ]
-        },
         "selector": {
           "description": "Name of Cookies to be matched",
           "type": "string"
@@ -3684,7 +3592,8 @@
             "LessThan",
             "LessThanOrEqual",
             "GreaterThan",
-            "GreaterThanOrEqual"
+            "GreaterThanOrEqual",
+            "RegEx"
           ],
           "x-ms-enum": {
             "name": "CookiesOperator",
@@ -3714,17 +3623,9 @@
     "IsDeviceMatchConditionParameters": {
       "description": "Defines the parameters for IsDevice match conditions",
       "required": [
-        "operator",
-        "matchValues",
-        "@odata.type"
+        "operator"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleIsDeviceConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -3807,16 +3708,9 @@
     "UrlRedirectActionParameters": {
       "description": "Defines the parameters for the url redirect action.",
       "required": [
-        "redirectType",
-        "@odata.type"
+        "redirectType"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlRedirectActionParameters"
-          ]
-        },
         "redirectType": {
           "description": "The redirect type the rule will use when redirecting traffic.",
           "type": "string",
@@ -3862,35 +3756,46 @@
         }
       }
     },
+    "UrlSigningAction": {
+      "description": "Defines the url signing action for the delivery rule.",
+      "x-ms-discriminator-value": "UrlSigning",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/UrlSigningActionParameters"
+        }
+      }
+    },
     "UrlSigningActionParameters": {
       "description": "Defines the parameters for the Url Signing action.",
       "required": [
         "keyId"
       ],
       "properties": {
-        "keyId": {
-          "description": "Id reference of the key to be used to verify the hash and should be defined in UrlSigningKeys",
-          "type": "string"
-        },
         "algorithm": {
           "description": "Algorithm to use for URL signing",
           "type": "string",
           "enum": [
             "SHA256"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "algorithm",
+            "modelAsString": true
+          }
         },
         "parameterNameOverride": {
           "description": "Defines which query string parameters in the url to be considered for expires, key id etc. ",
           "type": "array",
           "items": {
             "$ref": "#/definitions/UrlSigningParamIdentifier"
-          }
-        },
-        "ipSubnets": {
-          "description": "Match values to match against. Supports CIDR ranges (both IPv4 and IPv6).",
-          "type": "array",
-          "items": {
-            "type": "string"
           }
         }
       }
@@ -3906,10 +3811,14 @@
           "description": "Indicates the purpose of the parameter",
           "type": "string",
           "enum": [
-            "expires",
-            "keyId",
-            "signature"
-          ]
+            "Expires",
+            "KeyId",
+            "Signature"
+          ],
+          "x-ms-enum": {
+            "name": "paramIndicator",
+            "modelAsString": true
+          }
         },
         "paramName": {
           "description": "Parameter name",
@@ -3939,16 +3848,9 @@
       "description": "Defines the parameters for the url rewrite action.",
       "required": [
         "sourcePattern",
-        "destination",
-        "@odata.type"
+        "destination"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlRewriteActionParameters"
-          ]
-        },
         "sourcePattern": {
           "description": "define a request URI pattern that identifies the type of requests that may be rewritten. If value is blank, all strings are matched.",
           "type": "string"
@@ -4003,16 +3905,9 @@
       "description": "Defines the parameters for the request header action.",
       "required": [
         "headerAction",
-        "headerName",
-        "@odata.type"
+        "headerName"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleHeaderActionParameters"
-          ]
-        },
         "headerAction": {
           "description": "Action to perform",
           "type": "string",
@@ -4058,16 +3953,9 @@
       "description": "Defines the parameters for the cache expiration action.",
       "required": [
         "cacheBehavior",
-        "cacheType",
-        "@odata.type"
+        "cacheType"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleCacheExpirationActionParameters"
-          ]
-        },
         "cacheBehavior": {
           "description": "Caching behavior for the requests",
           "type": "string",
@@ -4120,16 +4008,9 @@
     "CacheKeyQueryStringActionParameters": {
       "description": "Defines the parameters for the cache-key query string action.",
       "required": [
-        "queryStringBehavior",
-        "@odata.type"
+        "queryStringBehavior"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.DeliveryRuleCacheKeyQueryStringBehaviorActionParameters"
-          ]
-        },
         "queryStringBehavior": {
           "description": "Caching behavior for the requests",
           "type": "string",
@@ -4945,16 +4826,9 @@
     "CdnCertificateSourceParameters": {
       "description": "Defines the parameters for using CDN managed certificate for securing custom domain.",
       "required": [
-        "@odata.type",
         "certificateType"
       ],
       "properties": {
-        "@odata.type": {
-          "type": "string",
-          "enum": [
-            "#Microsoft.Azure.Cdn.Models.CdnCertificateSourceParameters"
-          ]
-        },
         "certificateType": {
           "description": "Type of certificate used",
           "enum": [
@@ -5445,7 +5319,14 @@
             "Standard_Akamai",
             "Standard_ChinaCdn",
             "Standard_Microsoft",
-            "Premium_ChinaCdn"
+            "Premium_ChinaCdn",
+            "Standard_AzureFrontDoor",
+            "Premium_AzureFrontDoor",
+            "Standard_955BandWidth_ChinaCdn",
+            "Standard_AvgBandWidth_ChinaCdn",
+            "StandardPlus_ChinaCdn",
+            "StandardPlus_955BandWidth_ChinaCdn",
+            "StandardPlus_AvgBandWidth_ChinaCdn"
           ],
           "type": "string",
           "x-ms-enum": {
