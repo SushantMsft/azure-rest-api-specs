@@ -4146,7 +4146,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "type",
+            "name": "policyType",
             "modelAsString": true
           }
         }
