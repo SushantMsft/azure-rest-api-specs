@@ -4975,7 +4975,7 @@
         },
         "compressionSettings": {
           "description": "compression settings.",
-          "type": "array",
+          "type": "object",
           "items": {
             "$ref": "#/definitions/CompressionSettings"
           }
