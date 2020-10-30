@@ -4108,6 +4108,22 @@
         "enabled": {
           "description": "Origin is enabled for load balancing or not. By default, origin is always enabled.",
           "type": "boolean"
+        },
+        "privateLinkAlias": {
+          "description": "The Alias of the Private Link resource. Populating this optional field indicates that this origin is 'Private'",
+          "type": "string"
+        },
+        "privateLinkResourceId": {
+          "description": "The Resource Id of the Private Link resource. Populating this optional field indicates that this backend is 'Private'",
+          "type": "string"
+        },
+        "privateLinkLocation": {
+          "description": "The location of the Private Link resource. Required only if 'privateLinkResourceId' is populated",
+          "type": "string"
+        },
+        "privateLinkApprovalMessage": {
+          "description": "A custom message to be included in the approval request to connect to the Private Link.",
+          "type": "string"
         }
       },
       "x-ms-azure-resource": true
@@ -4301,7 +4317,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -4363,13 +4379,6 @@
       "type": "object",
       "description": "Origin properties needed for origin update.",
       "properties": {
-        "tags": {
-          "description": "Origin tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/OriginUpdatePropertiesParameters"
@@ -4869,7 +4878,6 @@
         "resourceGroupName",
         "vaultName",
         "secretName",
-        "secretVersion",
         "updateRule",
         "deleteRule"
       ],
