@@ -3188,7 +3188,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/{resourceGroupName}/providers/Microsoft.Cdn/validateSecret": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/validateSecret": {
       "post": {
         "tags": [
           "Secrets"
@@ -3201,9 +3201,6 @@
           }
         },
         "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
           {
             "name": "properties",
             "in": "body",
