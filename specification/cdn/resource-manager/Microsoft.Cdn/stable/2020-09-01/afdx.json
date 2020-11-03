@@ -2217,6 +2217,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
           "202": {
             "description": "Accepted"
           },
