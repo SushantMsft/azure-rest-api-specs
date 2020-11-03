@@ -3950,7 +3950,7 @@
             "modelAsString": true
           }
         },
-        "message":{
+        "message": {
           "description": "Detailed error message",
           "type": "string"
         }
@@ -4126,15 +4126,25 @@
     },
     "SecurityPolicyProperties": {
       "description": "The json object that contains properties required to create a security policy",
-      "discriminator": "policyType",
-      "required": [
-        "policyType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AFDStateProperties"
         }
       ],
+      "properties": {
+        "parameters": {
+          "description": "object which contains security policy parameters",
+          "$ref": "#/definitions/SecurityPolicyParameters"
+        }
+      }
+    },
+    "SecurityPolicyParameters": {
+      "description": "The json object containing security policy parameters",
+      "discriminator": "policyType",
+      "required": [
+        "policyType"
+      ],
+      "type": "object",
       "properties": {
         "policyType": {
           "description": "The type of the Security policy to create.",
@@ -4149,26 +4159,15 @@
         }
       }
     },
-    "SecurityPolicyWebApplicationFirewall": {
+    "SecurityPolicyWebApplicationFirewallParameters": {
       "description": "The json object containing security policy waf parameters",
       "x-ms-discriminator-value": "WebApplicationFirewall",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SecurityPolicyProperties"
+          "$ref": "#/definitions/SecurityPolicyParameters"
         }
       ],
-      "properties": {
-        "parameters": {
-          "description": "security policy waf parameters",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SecurityPolicyWebApplicationFirewallParameters"
-        }
-      }
-    },
-    "SecurityPolicyWebApplicationFirewallParameters": {
-      "description": "The json object containing security policy waf parameters",
-      "type": "object",
       "properties": {
         "wafPolicy": {
           "type": "object",
@@ -4400,17 +4399,17 @@
         }
       }
     },
-    "SecretUpdateParameters":{
+    "SecretUpdateParameters": {
       "description": "The domain JSON object required for Secret update.",
       "type": "object",
       "properties": {
-        "properties":{
+        "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SecretUpdatePropertiesParameters"
         }
       }
     },
-    "SecretUpdatePropertiesParameters":{
+    "SecretUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the domain to create.",
       "properties": {
         "parameters": {
