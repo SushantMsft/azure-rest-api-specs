@@ -5012,7 +5012,7 @@
             "modelAsString": true
           }
         },
-        "HTTPSRedirect": {
+        "httpsRedirect": {
           "description": "Whether to automatically redirect HTTP traffic to HTTPS traffic. Note that this is a easy way to set up this rule and it will be the first rule that gets executed.",
           "enum": [
             "Enabled",
@@ -5020,11 +5020,11 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "HTTPSRedirect",
+            "name": "httpsRedirect",
             "modelAsString": true
           }
         },
-        "enableState": {
+        "enabledState": {
           "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'",
           "enum": [
             "Enabled",
