@@ -3242,7 +3242,12 @@
           "LogAnalytics"
         ],
         "operationId": "LogAnalytics_GetLogAnalyticsMetrics",
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "x-ms-examples": {
+          "LogAnalytics_GetLogAnalyticsMetrics": {
+            "$ref": "./examples/LogAnalytics_GetLogAnalyticsMetrics.json"
+          }
+        },
+        "description": "Get log report for AFD profile",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -3272,21 +3277,8 @@
                 "clientRequestTraffic",
                 "clientRequestBandwidth",
                 "originRequestTraffic",
-                "originRequestBandwidth"
-              ]
-            }
-          },
-          {
-            "name": "groupBy",
-            "in": "query",
-            "type": "array",
-            "required": false,
-            "items": {
-              "type": "string",
-              "enum": [
-                "applicationProtocol",
-                "cacheHitMiss",
-                "httpStatusCode"
+                "originRequestBandwidth",
+                "totalLatency"
               ]
             }
           },
@@ -3316,21 +3308,28 @@
             ]
           },
           {
+            "name": "groupBy",
+            "in": "query",
+            "type": "array",
+            "required": false,
+            "items": {
+              "type": "string",
+              "enum": [
+                "httpStatusCode",
+                "protocol",
+                "cacheStatus",
+                "country",
+                "customDomain"
+              ]
+            }
+          },
+          {
             "name": "continents",
             "type": "array",
             "in": "query",
             "required": false,
             "items": {
-              "type": "string",
-              "enum": [
-                "africa",
-                "antarctica",
-                "asia",
-                "australia",
-                "europe",
-                "northAmerica",
-                "southAmerica"
-              ]
+              "type": "string"
             }
           },
           {
@@ -3343,7 +3342,7 @@
             }
           },
           {
-            "name": "endpoints",
+            "name": "customDomains",
             "type": "array",
             "required": false,
             "in": "query",
@@ -3352,7 +3351,7 @@
             }
           },
           {
-            "name": "customDomains",
+            "name": "protocols",
             "type": "array",
             "required": false,
             "in": "query",
@@ -3383,7 +3382,12 @@
           "LogAnalytics"
         ],
         "operationId": "LogAnalytics_GetLogAnalyticsRankings",
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "x-ms-examples": {
+          "LogAnalytics_GetLogAnalyticsRankings": {
+            "$ref": "./examples/LogAnalytics_GetLogAnalyticsRankings.json"
+          }
+        },
+        "description": "Get log analytics ranking report for AFD profile",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -3411,7 +3415,9 @@
               "enum": [
                 "url",
                 "referrer",
-                "countryOrRegions"
+                "browser",
+                "userAgent",
+                "countryOrRegion"
               ]
             }
           },
@@ -3452,15 +3458,6 @@
             "format": "date-time"
           },
           {
-            "name": "endpoints",
-            "type": "array",
-            "in": "query",
-            "required": false,
-            "items": {
-              "type": "string"
-            }
-          },
-          {
             "name": "customDomains",
             "type": "array",
             "in": "query",
@@ -3497,7 +3494,7 @@
             "$ref": "./examples/LogAnalytics_GetLogAnalyticsLocations.json"
           }
         },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "description": "Get all available location names for AFD log analytics report.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -3543,7 +3540,7 @@
             "$ref": "./examples/LogAnalytics_GetLogAnalyticsResources.json"
           }
         },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "description": "Get all endpoints and custom domains available for AFD log report",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -3584,7 +3581,12 @@
           "WafLogAnalytics"
         ],
         "operationId": "LogAnalytics_GetWafLogAnalyticsMetrics",
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "x-ms-examples": {
+          "LogAnalytics_GetWafLogAnalyticsMetrics": {
+            "$ref": "./examples/LogAnalytics_GetWafLogAnalyticsMetrics.json"
+          }
+        },
+        "description": "Get Waf related log analytics report for AFD profile.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -3610,7 +3612,7 @@
             "items": {
               "type": "string",
               "enum": [
-                "requestCount"
+                "clientRequestCount"
               ]
             }
           },
@@ -3640,15 +3642,6 @@
             ]
           },
           {
-            "name": "endpoints",
-            "type": "array",
-            "in": "query",
-            "required": false,
-            "items": {
-              "type": "string"
-            }
-          },
-          {
             "name": "actions",
             "type": "array",
             "in": "query",
@@ -3664,6 +3657,19 @@
             }
           },
           {
+            "name": "groupBy",
+            "in": "query",
+            "type": "array",
+            "required": false,
+            "items": {
+              "type": "string",
+              "enum": [
+                "httpStatusCode",
+                "customDomain"
+              ]
+            }
+          },
+          {
             "name": "ruleTypes",
             "type": "array",
             "in": "query",
@@ -3672,7 +3678,8 @@
               "type": "string",
               "enum": [
                 "managed",
-                "custom"
+                "custom",
+                "bot"
               ]
             }
           }
@@ -3699,7 +3706,12 @@
           "WafLogAnalytics"
         ],
         "operationId": "LogAnalytics_GetWafLogAnalyticsRankings",
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "x-ms-examples": {
+          "LogAnalytics_GetLogAnalyticsResources": {
+            "$ref": "./examples/LogAnalytics_GetWafLogAnalyticsRankings.json"
+          }
+        },
+        "description": "Get WAF log analytics charts for AFD profile",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -3725,7 +3737,7 @@
             "items": {
               "type": "string",
               "enum": [
-                "requestCount"
+                "clientRequestCount"
               ]
             }
           },
@@ -3750,7 +3762,7 @@
             "type": "number"
           },
           {
-            "name": "groupBy",
+            "name": "rankings",
             "type": "array",
             "in": "query",
             "required": true,
@@ -3766,15 +3778,6 @@
                 "country",
                 "ruleType"
               ]
-            }
-          },
-          {
-            "name": "endpoints",
-            "type": "array",
-            "in": "query",
-            "required": false,
-            "items": {
-              "type": "string"
             }
           },
           {
@@ -3801,7 +3804,8 @@
               "type": "string",
               "enum": [
                 "managed",
-                "custom"
+                "custom",
+                "bot"
               ]
             }
           }
